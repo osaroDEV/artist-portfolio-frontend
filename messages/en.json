@@ -1,0 +1,26 @@
+{
+  "Nav": {
+    "recently": "Recently",
+    "works": "Works",
+    "paintings": "Paintings",
+    "drawings": "Drawings",
+    "photography": "Photography",
+    "about": "About",
+    "contact": "Contact",
+    "cv": "CV"
+  },
+  "Gallery": {
+    "dimensions": "Dimensions",
+    "medium": "Medium",
+    "year": "Year",
+    "viewMore": "View More"
+  },
+  "Contact": {
+    "title": "Get in Touch",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Send",
+    "success": "Thank you for your message."
+  }
+}

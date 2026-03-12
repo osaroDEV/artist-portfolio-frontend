@@ -1,0 +1,26 @@
+{
+  "Nav": {
+    "recently": "Aktuell",
+    "works": "Arbeiten",
+    "paintings": "Malerei",
+    "drawings": "Zeichnungen",
+    "photography": "Fotografie",
+    "about": "Über",
+    "contact": "Kontakt",
+    "cv": "Lebenslauf"
+  },
+  "Gallery": {
+    "dimensions": "Maße",
+    "medium": "Medium",
+    "year": "Jahr",
+    "viewMore": "Mehr sehen"
+  },
+  "Contact": {
+    "title": "Kontakt",
+    "name": "Name",
+    "email": "E-Mail",
+    "message": "Nachricht",
+    "submit": "Senden",
+    "success": "Vielen Dank für Ihre Nachricht."
+  }
+}

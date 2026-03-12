@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-cream: #f9f8f4;
+  --color-brand-charcoal: #1a1a1a;
+  --font-serif: "Crimson Pro", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 60 20% 98%;
+    --foreground: 0 0% 10%;
+  }
+
+  body {
+    @apply bg-brand-cream text-brand-charcoal selection:bg-brand-charcoal/10;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif font-light tracking-tight;
+  }
+
+  p, span, a, button {
+    @apply font-sans font-light tracking-wide;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative py-1 text-sm uppercase tracking-widest opacity-60 transition-opacity hover:opacity-100;
+  }
+
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 h-px w-0 bg-current transition-all duration-300 content-[''];
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .active-nav-link {
+    @apply opacity-100;
+  }
+
+  .active-nav-link::after {
+    @apply w-full;
+  }
+}
+
+/* Portable Text formatting for CV/Exhibitions */
+.CV-portable-text p {
+  margin-bottom: 1.5rem;
+}
+
+.CV-portable-text strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
