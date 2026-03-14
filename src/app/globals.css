@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-cream: #f9f8f4;
-  --color-brand-charcoal: #1a1a1a;
-  --font-serif: "Crimson Pro", serif;
-  --font-sans: "Inter", sans-serif;
+  --color-brand-cream: #ffffff;
+  --color-brand-charcoal: #375e77;
+  --font-serif: var(--font-sans);
+  --font-sans: var(--font-sans);
 }
 
 @layer base {
   :root {
-    --background: 60 20% 98%;
-    --foreground: 0 0% 10%;
+    --background: 0 0% 100%;
+    --foreground: 201 37% 34%; /* #375e77 */
   }
 
   body {
-    @apply bg-brand-cream text-brand-charcoal selection:bg-brand-charcoal/10;
+    @apply bg-white text-brand-charcoal selection:bg-brand-charcoal/10;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4 {
-    @apply font-serif font-light tracking-tight;
+    @apply font-sans font-light tracking-[0.15em] uppercase;
   }
 
   p, span, a, button {

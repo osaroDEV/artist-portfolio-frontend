@@ -94,3 +94,28 @@ export interface SiteSettings {
   drawingsTitle: string;
   photographyTitle: string;
 }
+
+export interface AboutExhibition {
+  _key: string;
+  type: 'education' | 'residency' | 'publication' | 'solo-exhibition' | 'group-exhibition';
+  year?: string;
+  title?: string;
+  institution?: string;
+  description?: string;
+  role?: string;
+  link?: string;
+}
+
+export interface NetworkLink {
+  _key: string;
+  name: string;
+  url: string;
+}
+
+export interface AboutPageData {
+  portraitImage: SanityImage;
+  bio: string;
+  artistStatement: any;
+  exhibitions: AboutExhibition[];
+  networkLinks: NetworkLink[];
+}

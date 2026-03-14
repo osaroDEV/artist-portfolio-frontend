@@ -1,5 +1,5 @@
 import {client} from './sanity'
-import {GalleryItem, RecentlyPost, SiteSettings} from './types'
+import {GalleryItem, RecentlyPost, SiteSettings, AboutPageData} from './types'
 
 // Helper to build locale-specific GROQ projection
 function localeString(field: string, locale: string) {
@@ -141,4 +141,71 @@ export async function getSiteSettings(locale: string): Promise<SiteSettings | nu
   }`
 
   return client.fetch<SiteSettings>(query)
+}
+
+export const ABOUT_QUERY = `*[_type == "aboutPage"][0] {
+  portraitImage {
+    asset->{
+      _id,
+      url,
+      metadata {
+        dimensions,
+        lqip
+      }
+    },
+    hotspot,
+    crop
+  },
+  "bio": coalesce(bio.$locale, bio.en),
+  "artistStatement": coalesce(artistStatement.$locale, artistStatement.en),
+  exhibitions[] {
+    _key,
+    type,
+    year,
+    "title": coalesce(title.$locale, title.en),
+    "institution": coalesce(institution.$locale, institution.en),
+    "description": coalesce(description.$locale, description.en),
+    "role": coalesce(role.$locale, role.en),
+    link
+  },
+  networkLinks[] {
+    _key,
+    name,
+    url
+  }
+}`
+
+export async function fetchAbout(locale: string): Promise<AboutPageData | null> {
+  const query = `*[_type == "aboutPage"][0] {
+    portraitImage {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions,
+          lqip
+        }
+      },
+      hotspot,
+      crop
+    },
+    ${localeString('bio', locale)},
+    ${localePortableText('artistStatement', locale)},
+    exhibitions[] {
+      _key,
+      type,
+      year,
+      ${localeString('title', locale)},
+      ${localeString('institution', locale)},
+      ${localeString('description', locale)},
+      ${localeString('role', locale)},
+      link
+    },
+    networkLinks[] {
+      _key,
+      name,
+      url
+    }
+  }`
+  return client.fetch<AboutPageData>(query)
 }

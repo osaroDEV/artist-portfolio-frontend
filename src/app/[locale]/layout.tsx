@@ -42,7 +42,7 @@ export default async function LocaleLayout(props: {
       >
         <NextIntlClientProvider messages={messages}>
           <Navigation />
-          <main className="min-h-screen pt-48 md:pt-64 px-6 md:px-12 max-w-screen-2xl mx-auto pb-24">
+          <main className="min-h-screen pt-32 md:pt-16 md:ml-64 px-6 md:px-16 max-w-screen-2xl pb-24">
             {children}
           </main>
 
@@ -50,7 +50,7 @@ export default async function LocaleLayout(props: {
           <footer className="px-6 md:px-12 py-12 max-w-screen-2xl mx-auto flex justify-between items-center text-[10px] uppercase tracking-widest opacity-40">
             <div> © 2026 Ella Becker. All rights reserved. Website by <a href="https://codeillustrated.com/labs" className='underline' target="_blank" rel="noopener noreferrer">Code Illustrated Labs</a></div>
             <div className="flex space-x-6">
-              <a href="#" className="hover:opacity-100 transition-opacity">
+              <a href="https://www.instagram.com/ellarbecker" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
                 Instagram
               </a>
               <Link

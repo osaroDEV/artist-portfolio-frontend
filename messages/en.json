@@ -22,5 +22,16 @@
     "message": "Message",
     "submit": "Send",
     "success": "Thank you for your message."
+  },
+  "about": {
+    "statement_label": "Artist Statement",
+    "exhibitions_label": "Exhibitions",
+    "education_label": "Education",
+    "projects_label": "Projects",
+    "bibliography_label": "Bibliography",
+    "network_label": "Network"
+  },
+  "meta": {
+    "about_title": "About - Ella Becker"
   }
 }

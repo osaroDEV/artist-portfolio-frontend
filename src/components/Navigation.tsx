@@ -1,61 +1,75 @@
-'use client';
+"use client";
 
-import {Link, usePathname} from '@/i18n/routing';
-import {useTranslations, useLocale} from 'next-intl';
-import LanguageSwitcher from './LanguageSwitcher';
-import {useState} from 'react';
-import {motion, AnimatePresence} from 'framer-motion';
-import {Menu, X} from 'lucide-react';
+import { Link, usePathname } from "@/i18n/routing";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navigation() {
-  const t = useTranslations('Nav');
+  const t = useTranslations("Nav");
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    {href: '/recently', label: t('recently')},
-    {href: '/paintings', label: t('paintings')},
-    {href: '/drawings', label: t('drawings')},
-    {href: '/photography', label: t('photography')},
-    {href: '/about', label: t('about')},
-    {href: '/contact', label: t('contact')},
+    { href: "/recently", label: t("recently") },
+    { href: "/paintings", label: t("paintings") },
+    { href: "/drawings", label: t("drawings") },
+    { href: "/photography", label: t("photography") },
+    { href: "/about", label: t("about") },
+    { href: "/contact", label: t("contact") },
   ];
 
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-8 md:px-12 md:py-12 bg-transparent pointer-events-none">
-      <div className="flex justify-between items-start max-w-screen-2xl mx-auto">
+    <nav className="z-50">
+      {/* Desktop Sidebar */}
+      <div className="hidden md:flex fixed left-0 top-0 h-full w-64 flex-col p-12 border-r border-transparent">
         {/* Logo */}
-        <Link href="/" className="pointer-events-auto group">
-          <h1 className="text-2xl md:text-3xl font-light tracking-[-0.05em]">
-            Ella Becker
+        <Link href="/" className="group mb-16">
+          <h1 className="text-3xl md:text-4xl font-light leading-[1.1] tracking-[-0.02em] text-brand-charcoal">
+            Ella
+            <br />
+            Becker
           </h1>
-          <div className="h-px w-0 bg-brand-charcoal transition-all duration-500 group-hover:w-full" />
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex flex-col items-end space-y-6 pointer-events-auto">
-          <div className="flex space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href as any}
-                className={`nav-link ${isActive(item.href) ? 'active-nav-link' : ''}`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-          <LanguageSwitcher />
+        {/* Desktop Nav Items */}
+        <div className="flex flex-col space-y-4 mb-auto">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href as any}
+              className={`text-xs uppercase tracking-[0.2em] transition-all hover:translate-x-1 ${
+                isActive(item.href)
+                  ? "text-brand-charcoal font-medium"
+                  : "text-brand-charcoal/60 hover:text-brand-charcoal"
+              }`}
+            >
+              {isActive(item.href) && <span className="mr-2">—</span>}
+              {item.label}
+            </Link>
+          ))}
         </div>
 
-        {/* Mobile menu toggle */}
-        <button
-          className="md:hidden pointer-events-auto"
-          onClick={() => setIsOpen(true)}
-        >
-          <Menu size={24} strokeWidth={1} />
+        {/* Desktop Footer-like area in sidebar */}
+        <div className="mt-12 space-y-8 absolute bottom-40">
+          <LanguageSwitcher />
+          {/* <div className="flex space-x-4 opacity-60">
+             <a href="#" className="hover:opacity-100 transition-opacity"><span className="text-[10px] uppercase tracking-widest">Instagram</span></a>
+          </div> */}
+        </div>
+      </div>
+
+      {/* Mobile Header */}
+      <div className="md:hidden fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 px-6 py-6 border-b border-brand-charcoal/5 flex justify-between items-center">
+        <Link href="/">
+          <h1 className="text-xl font-light tracking-tight">Ella Becker</h1>
+        </Link>
+        <button className="p-2" onClick={() => setIsOpen(true)}>
+          <Menu size={20} strokeWidth={1} />
         </button>
       </div>
 
@@ -63,10 +77,10 @@ export default function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{opacity: 0, x: '100%'}}
-            animate={{opacity: 1, x: 0}}
-            exit={{opacity: 0, x: '100%'}}
-            transition={{type: 'spring', damping: 25, stiffness: 200}}
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="fixed inset-0 z-60 bg-brand-cream p-12 flex flex-col pointer-events-auto"
           >
             <div className="flex justify-end mb-12">
@@ -82,7 +96,7 @@ export default function Navigation() {
                   href={item.href as any}
                   onClick={() => setIsOpen(false)}
                   className={`text-4xl font-serif font-light ${
-                    isActive(item.href) ? 'opacity-100 italic' : 'opacity-40'
+                    isActive(item.href) ? "opacity-100 italic" : "opacity-40"
                   }`}
                 >
                   {item.label}
@@ -94,7 +108,20 @@ export default function Navigation() {
             <div className="mt-auto pt-12 border-t border-brand-charcoal/10 flex flex-col space-y-8">
               <LanguageSwitcher />
               <div className="text-[10px] uppercase tracking-widest opacity-40">
-                © 2026 Ella Becker. All rights reserved. Website by <a href="https://codeillustrated.com/labs" className='underline' target="_blank" rel="noopener noreferrer">Code Illustrated Labs</a>
+                <span>© 2026 Ella Becker. All rights reserved.</span>
+                <br />
+                <span className="text-[8px] sm:text-[10px] uppercase tracking-widest opacity-40">
+                  {" "}
+                  Website by{" "}
+                  <a
+                    href="https://codeillustrated.com/labs"
+                    className="underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Code Illustrated Labs
+                  </a>
+                </span>
               </div>
             </div>
           </motion.div>
