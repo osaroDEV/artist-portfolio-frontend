@@ -36,11 +36,3 @@ export default async function CategoryPage(props: {
   );
 }
 
-// Ensure static params for performance if needed, or stick to SSR for CMS freshness
-export async function generateStaticParams() {
-  return [
-    {category: 'paintings'},
-    {category: 'drawings'},
-    {category: 'photography'}
-  ];
-}
