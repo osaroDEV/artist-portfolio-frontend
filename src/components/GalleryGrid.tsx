@@ -6,7 +6,7 @@ import { GalleryItem as GalleryItemType } from '@/lib/types';
 import GalleryItem from './GalleryItem';
 import { urlFor } from '@/lib/sanity';
 import Image from 'next/image';
-import { X, ChevronLeft, ChevronRight, Maximize2, Minimize2 } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Maximize2, Minimize2, ZoomIn, ZoomOut } from 'lucide-react';
 
 interface Props {
   items: GalleryItemType[];
@@ -15,6 +15,8 @@ interface Props {
 export default function GalleryGrid({ items }: Props) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [scale, setScale] = useState(1);
+  const isZoomed = scale > 1;
   const lightboxRef = useRef<HTMLDivElement>(null);
 
   const selectedItem = selectedIndex !== null ? items[selectedIndex] : null;
@@ -33,6 +35,7 @@ export default function GalleryGrid({ items }: Props) {
 
   const closeLightbox = useCallback(() => {
     setSelectedIndex(null);
+    setScale(1);
     if (document.fullscreenElement) {
       document.exitFullscreen().catch(() => {});
     }
@@ -42,6 +45,7 @@ export default function GalleryGrid({ items }: Props) {
     e?.stopPropagation();
     if (selectedIndex !== null) {
       setSelectedIndex((selectedIndex + 1) % items.length);
+      setScale(1);
     }
   }, [selectedIndex, items.length]);
 
@@ -49,8 +53,23 @@ export default function GalleryGrid({ items }: Props) {
     e?.stopPropagation();
     if (selectedIndex !== null) {
       setSelectedIndex((selectedIndex - 1 + items.length) % items.length);
+      setScale(1);
     }
   }, [selectedIndex, items.length]);
+
+  const toggleZoom = useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setScale((prev) => (prev > 1 ? 1 : 2.5));
+  }, []);
+
+  const handleWheel = useCallback((e: React.WheelEvent) => {
+    // Only zoom if we are inside the lightbox
+    e.stopPropagation();
+    setScale((prev) => {
+      const delta = e.deltaY < 0 ? 0.2 : -0.2;
+      return Math.min(Math.max(prev + delta, 1), 5); // Limits: 1x to 5x
+    });
+  }, []);
 
   const toggleFullscreen = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
@@ -88,11 +107,14 @@ export default function GalleryGrid({ items }: Props) {
         case 'f':
           toggleFullscreen();
           break;
+        case 'z':
+          toggleZoom();
+          break;
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIndex, closeLightbox, goToNext, goToPrevious, toggleFullscreen]);
+  }, [selectedIndex, closeLightbox, goToNext, goToPrevious, toggleFullscreen, toggleZoom]);
 
   return (
     <>
@@ -136,6 +158,13 @@ export default function GalleryGrid({ items }: Props) {
             <div className="absolute top-6 right-6 flex items-center space-x-6 z-30">
               <button
                 className="text-brand-charcoal/60 hover:text-brand-charcoal transition-colors"
+                onClick={toggleZoom}
+                title="Toggle Zoom (Z)"
+              >
+                {isZoomed ? <ZoomOut size={24} strokeWidth={1} /> : <ZoomIn size={24} strokeWidth={1} />}
+              </button>
+              <button
+                className="text-brand-charcoal/60 hover:text-brand-charcoal transition-colors"
                 onClick={toggleFullscreen}
                 title="Toggle Fullscreen (F)"
               >
@@ -159,16 +188,35 @@ export default function GalleryGrid({ items }: Props) {
               className="relative max-w-5xl w-full h-full flex flex-col justify-center gap-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative flex-1 w-full min-h-0">
-                <Image
-                  key={selectedItem._id} // Force re-render for transition
-                  src={urlFor(selectedItem.image).width(2000).url()}
-                  alt={selectedItem.image.alt || selectedItem.title}
-                  fill
-                  className="object-contain"
-                  sizes="100vw"
-                  priority
-                />
+              <div 
+                className={`relative flex-1 w-full min-h-0 overflow-hidden ${isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
+                onDoubleClick={toggleZoom}
+                onWheel={handleWheel}
+              >
+                <motion.div
+                  className="w-full h-full relative"
+                  animate={{ 
+                    scale: scale,
+                    x: isZoomed ? undefined : 0,
+                    y: isZoomed ? undefined : 0
+                  }}
+                  transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                  drag={isZoomed}
+                  dragConstraints={{ left: -1000, right: 1000, top: -1000, bottom: 1000 }}
+                  dragElastic={0.1}
+                  onDragStart={(e) => e.stopPropagation()}
+                >
+                  <Image
+                    key={selectedItem._id} // Force re-render for transition
+                    src={urlFor(selectedItem.image).width(2400).url()} // Increased width for better zoom quality
+                    alt={selectedItem.image.alt || selectedItem.title}
+                    fill
+                    className="object-contain pointer-events-none"
+                    sizes="100vw"
+                    priority
+                    draggable={false}
+                  />
+                </motion.div>
               </div>
 
               {/* Mobile Navigation / Controls */}

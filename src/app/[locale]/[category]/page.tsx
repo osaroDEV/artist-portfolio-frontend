@@ -1,21 +1,23 @@
 import {getGalleryItems, getSiteSettings} from '@/lib/queries';
 import GalleryGrid from '@/components/GalleryGrid';
+import {getTranslations} from 'next-intl/server';
 
 export default async function CategoryPage(props: {
   params: Promise<{locale: string; category: string}>;
 }) {
   const {locale, category} = await props.params;
 
-  const [items, settings] = await Promise.all([
+  const [items, settings, t] = await Promise.all([
     getGalleryItems(locale, category),
-    getSiteSettings(locale)
+    getSiteSettings(locale),
+    getTranslations({locale, namespace: 'Nav'})
   ]);
   
-  // Mapping route name to dynamic titles from Sanity
+  // Mapping route name to dynamic titles from Sanity with localized fallbacks
   const categoryTitle = {
-    paintings: settings?.paintingsTitle || 'Paintings',
-    drawings: settings?.drawingsTitle || 'Drawings',
-    photography: settings?.photographyTitle || 'Photography'
+    paintings: settings?.paintingsTitle || t('paintings'),
+    drawings: settings?.drawingsTitle || t('drawings'),
+    photography: settings?.photographyTitle || t('photography')
   }[category] || category.charAt(0).toUpperCase() + category.slice(1);
 
   return (
