@@ -20,18 +20,6 @@ export default async function ContactPage(props: {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-32">
         {/* Direct Contact Info */}
         <div className="md:col-span-12 lg:col-span-4 space-y-12">
-          <section className="space-y-3">
-            <h3 className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/40">
-              {settings?.emailLabel || 'Email'}
-            </h3>
-            <a 
-              href={`mailto:${settings?.contactEmail || 'studio@ellabecker.de'}`} 
-              className="text-base font-light hover:text-brand-charcoal transition-all inline-block border-b border-brand-charcoal/10"
-            >
-              {settings?.contactEmail || 'studio@ellabecker.de'}
-            </a>
-          </section>
-
           {settings?.instagramUrl && (
             <section className="space-y-3">
               <h3 className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/40">
