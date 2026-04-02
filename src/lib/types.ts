@@ -1,7 +1,6 @@
 export interface LocalizedString {
   en: string;
   de?: string;
-  fr?: string;
 }
 
 export interface SanityImage {
@@ -88,11 +87,15 @@ export interface SiteSettings {
   formNameLabel: string;
   formEmailLabel: string;
   formMobileLabel: string;
+  formSubjectLabel: string;
   formMessageLabel: string;
   formSubmitLabel: string;
   paintingsTitle: string;
   drawingsTitle: string;
   photographyTitle: string;
+  newsletterTitle: string;
+  newsletterSubtitle: string;
+  newsletterSubmitLabel: string;
 }
 
 export interface AboutExhibition {

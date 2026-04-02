@@ -70,6 +70,16 @@ export default async function ContactPage(props: {
               className="w-full bg-transparent border-b border-brand-charcoal/10 py-2 focus:outline-none focus:border-brand-charcoal transition-colors font-light text-sm"
             />
           </div>
+          
+          <div className="space-y-2 group">
+            <label className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/30 group-focus-within:text-brand-charcoal transition-colors">
+              {settings?.formSubjectLabel || 'Subject'}
+            </label>
+            <input 
+              type="text" 
+              className="w-full bg-transparent border-b border-brand-charcoal/10 py-2 focus:outline-none focus:border-brand-charcoal transition-colors font-light text-sm"
+            />
+          </div>
 
           <div className="space-y-2 group">
             <label className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/30 group-focus-within:text-brand-charcoal transition-colors">

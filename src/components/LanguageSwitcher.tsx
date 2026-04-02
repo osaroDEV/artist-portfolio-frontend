@@ -10,14 +10,14 @@ export default function LanguageSwitcher() {
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
-  function onLocaleChange(nextLocale: 'en' | 'de' | 'fr') {
+  function onLocaleChange(nextLocale: 'en' | 'de') {
     startTransition(() => {
       router.replace(pathname, {locale: nextLocale});
     });
   }
 
   return (
-    <div className="flex items-center space-x-4 text-[10px] uppercase tracking-[0.2em]">
+    <div className="flex items-center space-x-4 text-base uppercase tracking-[0.2em]">
       {routing.locales.map((cur) => (
         <button
           key={cur}

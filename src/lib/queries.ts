@@ -133,11 +133,15 @@ export async function getSiteSettings(locale: string): Promise<SiteSettings | nu
     ${localeString('formNameLabel', locale)},
     ${localeString('formEmailLabel', locale)},
     ${localeString('formMobileLabel', locale)},
+    ${localeString('formSubjectLabel', locale)},
     ${localeString('formMessageLabel', locale)},
     ${localeString('formSubmitLabel', locale)},
     ${localeString('paintingsTitle', locale)},
     ${localeString('drawingsTitle', locale)},
-    ${localeString('photographyTitle', locale)}
+    ${localeString('photographyTitle', locale)},
+    ${localeString('newsletterTitle', locale)},
+    ${localeString('newsletterSubtitle', locale)},
+    ${localeString('newsletterSubmitLabel', locale)}
   }`
 
   return client.fetch<SiteSettings>(query)
