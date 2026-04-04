@@ -41,7 +41,7 @@ export default function NewsletterForm({ title = 'Stay updated', subtitle, submi
       <div className="space-y-1">
         <h3 className="text-xs uppercase tracking-widest font-medium opacity-90">{title}</h3>
         {subtitle && (
-          <p className="text-[10px] uppercase tracking-wide opacity-50 italic">{subtitle}</p>
+          <p className="text-[10px] uppercase tracking-wide opacity-70 italic">{subtitle}</p>
         )}
       </div>
       
@@ -51,12 +51,12 @@ export default function NewsletterForm({ title = 'Stay updated', subtitle, submi
           name="email"
           placeholder="your email address"
           required
-          className="bg-transparent border-b border-brand-charcoal/30 py-2 text-[10px] uppercase tracking-widest focus:outline-none focus:border-brand-charcoal transition-all w-full placeholder:opacity-30"
+          className="bg-transparent border-b border-brand-charcoal/40 py-2 text-[10px] uppercase tracking-widest focus:outline-none focus:border-brand-charcoal transition-all w-full placeholder:opacity-50"
           disabled={status === 'loading'}
         />
         <button
           type="submit"
-          className="border-b border-brand-charcoal/30 py-2 px-6 text-[10px] uppercase tracking-widest hover:border-brand-charcoal hover:bg-brand-charcoal/5 transition-all disabled:opacity-50 font-medium"
+          className="border-b border-brand-charcoal/40 py-2 px-6 text-[10px] uppercase tracking-widest hover:border-brand-charcoal hover:bg-brand-charcoal/5 transition-all disabled:opacity-50 font-medium"
           disabled={status === 'loading'}
         >
           {status === 'loading' ? '...' : submitLabel}

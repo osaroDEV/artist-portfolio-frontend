@@ -139,6 +139,7 @@ export async function getSiteSettings(locale: string): Promise<SiteSettings | nu
     ${localeString('paintingsTitle', locale)},
     ${localeString('drawingsTitle', locale)},
     ${localeString('photographyTitle', locale)},
+    ${localeString('aboutTitle', locale)},
     ${localeString('newsletterTitle', locale)},
     ${localeString('newsletterSubtitle', locale)},
     ${localeString('newsletterSubmitLabel', locale)}

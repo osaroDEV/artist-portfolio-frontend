@@ -2,7 +2,8 @@
 
 @theme {
   --color-brand-cream: #ffffff;
-  --color-brand-charcoal: #375e77;
+  --color-brand-charcoal: #181818;
+  --color-brand-pink: #DE5D83;
   --font-serif: var(--font-sans);
   --font-sans: var(--font-sans);
 }
@@ -10,11 +11,11 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 201 37% 34%; /* #375e77 */
+    --foreground: 0 0% 9%; /* #181818 */
   }
 
   body {
-    @apply bg-white text-brand-charcoal selection:bg-brand-charcoal/10;
+    @apply bg-white text-brand-charcoal selection:bg-brand-pink/10;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -29,7 +30,7 @@
 
 @layer components {
   .nav-link {
-    @apply relative py-1 text-sm uppercase tracking-widest opacity-60 transition-opacity hover:opacity-100;
+    @apply relative py-1 text-sm uppercase tracking-widest opacity-80 transition-opacity hover:opacity-100;
   }
 
   .nav-link::after {

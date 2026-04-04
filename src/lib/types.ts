@@ -93,6 +93,7 @@ export interface SiteSettings {
   paintingsTitle: string;
   drawingsTitle: string;
   photographyTitle: string;
+  aboutTitle: string;
   newsletterTitle: string;
   newsletterSubtitle: string;
   newsletterSubmitLabel: string;

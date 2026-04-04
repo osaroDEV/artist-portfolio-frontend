@@ -8,7 +8,7 @@ import {PortableText} from '@portabletext/react';
 
 const easeSilk: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-export default function AboutPageClient({data}: {data: AboutPageData}) {
+export default function AboutPageClient({data, title}: {data: AboutPageData; title: string}) {
   const t = useTranslations('about');
 
   const education = data.exhibitions?.filter(e => e.type === 'education') || [];
@@ -49,6 +49,13 @@ export default function AboutPageClient({data}: {data: AboutPageData}) {
         {/* Right Column: Content */}
         <div className="md:col-span-12 lg:col-span-8 flex flex-col gap-24 pt-4">
           
+          {/* Header Title */}
+          <div className="mb-0">
+             <h1 className="text-[11px] md:text-xs uppercase tracking-[0.3em] font-medium text-brand-charcoal/40 border-b border-brand-charcoal/10 pb-4">
+               {title}
+             </h1>
+          </div>
+
           {/* 1. Bio & Statement */}
           <motion.section 
             initial={{opacity: 0, y: 20}}

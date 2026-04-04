@@ -42,10 +42,10 @@ export default function Navigation() {
             <Link
               key={item.href}
               href={item.href as any}
-              className={`text-xs uppercase tracking-[0.2em] transition-all hover:translate-x-1 ${
+              className={`text-xs uppercase tracking-[0.2em] transition-all hover:translate-x-1 hover:text-brand-pink ${
                 isActive(item.href)
-                  ? "text-brand-charcoal font-medium"
-                  : "text-brand-charcoal/60 hover:text-brand-charcoal"
+                  ? "text-brand-pink font-medium"
+                  : "text-brand-charcoal/80"
               }`}
             >
               {isActive(item.href) && <span className="mr-2">—</span>}
@@ -54,13 +54,7 @@ export default function Navigation() {
           ))}
         </div>
 
-        {/* Desktop Footer-like area in sidebar */}
-        <div className="mt-12 space-y-8 absolute bottom-40">
-          <LanguageSwitcher />
-          {/* <div className="flex space-x-4 opacity-60">
-             <a href="#" className="hover:opacity-100 transition-opacity"><span className="text-[10px] uppercase tracking-widest">Instagram</span></a>
-          </div> */}
-        </div>
+
       </div>
 
       {/* Mobile Header */}
@@ -95,8 +89,8 @@ export default function Navigation() {
                   key={item.href}
                   href={item.href as any}
                   onClick={() => setIsOpen(false)}
-                  className={`text-4xl font-serif font-light ${
-                    isActive(item.href) ? "opacity-100 italic" : "opacity-40"
+                  className={`text-4xl font-serif font-light transition-colors hover:text-brand-pink ${
+                    isActive(item.href) ? "text-brand-pink italic" : "opacity-70"
                   }`}
                 >
                   {item.label}
@@ -107,10 +101,10 @@ export default function Navigation() {
 
             <div className="mt-auto pt-12 border-t border-brand-charcoal/10 flex flex-col space-y-8">
               <LanguageSwitcher />
-              <div className="text-[10px] uppercase tracking-widest opacity-40">
+              <div className="text-[10px] uppercase tracking-widest opacity-70">
                 <span>© 2026 Ella Becker. All rights reserved.</span>
                 <br />
-                <span className="text-[8px] sm:text-[10px] uppercase tracking-widest opacity-40">
+                <span className="text-[8px] sm:text-[10px] uppercase tracking-widest opacity-70">
                   {" "}
                   Website by{" "}
                   <a
@@ -127,6 +121,10 @@ export default function Navigation() {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* Desktop Language Switcher (Top Right) */}
+      <div className="hidden md:block fixed top-12 right-12 z-50">
+        <LanguageSwitcher />
+      </div>
     </nav>
   );
 }

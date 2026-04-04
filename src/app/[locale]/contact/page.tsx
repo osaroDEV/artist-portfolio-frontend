@@ -22,7 +22,7 @@ export default async function ContactPage(props: {
         <div className="md:col-span-12 lg:col-span-4 space-y-12">
           {settings?.instagramUrl && (
             <section className="space-y-3">
-              <h3 className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/40">
+              <h3 className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/70">
                 {settings?.instagramLabel || 'Instagram'}
               </h3>
               <a 
@@ -40,7 +40,7 @@ export default async function ContactPage(props: {
         {/* Minimalist Form */}
         <form className="md:col-span-12 lg:col-span-8 space-y-12 max-w-2xl">
           <div className="space-y-2 group">
-            <label className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/30 group-focus-within:text-brand-charcoal transition-colors">
+            <label className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/70 group-focus-within:text-brand-charcoal transition-colors">
               {settings?.formNameLabel || 'Name'}
             </label>
             <input 
@@ -50,7 +50,7 @@ export default async function ContactPage(props: {
           </div>
 
           <div className="space-y-2 group">
-            <label className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/30 group-focus-within:text-brand-charcoal transition-colors">
+            <label className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/70 group-focus-within:text-brand-charcoal transition-colors">
               {settings?.formEmailLabel || 'Email'}
             </label>
             <input 
@@ -60,7 +60,7 @@ export default async function ContactPage(props: {
           </div>
           
           <div className="space-y-2 group">
-            <label className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/30 group-focus-within:text-brand-charcoal transition-colors">
+            <label className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/70 group-focus-within:text-brand-charcoal transition-colors">
               {settings?.formSubjectLabel || 'Subject'}
             </label>
             <input 
@@ -70,7 +70,7 @@ export default async function ContactPage(props: {
           </div>
 
           <div className="space-y-2 group">
-            <label className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/30 group-focus-within:text-brand-charcoal transition-colors">
+            <label className="text-[10px] uppercase tracking-[0.2em] text-brand-charcoal/70 group-focus-within:text-brand-charcoal transition-colors">
               {settings?.formMessageLabel || 'Message'}
             </label>
             <textarea 

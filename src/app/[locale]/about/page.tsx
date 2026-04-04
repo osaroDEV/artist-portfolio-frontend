@@ -1,4 +1,4 @@
-import {fetchAbout} from '@/lib/queries';
+import {fetchAbout, getSiteSettings} from '@/lib/queries';
 import {getTranslations} from 'next-intl/server';
 import AboutPageClient from '@/components/about/AboutPage';
 
@@ -24,8 +24,12 @@ export default async function AboutPageRoute({
   params: Promise<{locale: string}>;
 }) {
   const {locale} = await params;
-  const data = await fetchAbout(locale);
+  const [data, settings] = await Promise.all([
+    fetchAbout(locale),
+    getSiteSettings(locale)
+  ]);
+
   if (!data) return null;
 
-  return <AboutPageClient data={data} />;
+  return <AboutPageClient data={data} title={settings?.aboutTitle || 'About'} />;
 }
