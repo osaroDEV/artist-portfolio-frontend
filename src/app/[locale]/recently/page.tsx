@@ -1,9 +1,10 @@
-import {getRecentlyFeed} from '@/lib/queries';
+import {getRecentlyFeed, getSiteSettings} from '@/lib/queries';
 import {PortableText} from '@portabletext/react';
 import Image from 'next/image';
 import {urlFor} from '@/lib/sanity';
 import {format} from 'date-fns';
 import {de, enUS, fr} from 'date-fns/locale';
+import Hero from '@/components/Hero';
 
 const dateLocales = {en: enUS, de, fr};
 
@@ -12,17 +13,32 @@ export default async function RecentlyPage(props: {
 }) {
   const {locale} = await props.params;
 
-  const posts = await getRecentlyFeed(locale);
+  const [posts, settings] = await Promise.all([
+    getRecentlyFeed(locale),
+    getSiteSettings(locale)
+  ]);
+  
   const dateLocale = dateLocales[locale as keyof typeof dateLocales] || enUS;
+  const heroImage = settings?.heroRecently;
 
   return (
-    <div className="max-w-3xl mx-auto space-y-32 md:space-y-48">
-      <header className="mb-24">
-        <h2 className="text-4xl md:text-6xl font-light mb-4 italic">Recently</h2>
-        <div className="h-px w-24 bg-brand-charcoal opacity-20" />
-      </header>
+    <div className="max-w-screen-2xl mx-auto">
+      {heroImage ? (
+        <div className="-mx-6 md:-mx-16 -mt-32 md:-mt-24 mb-24 md:mb-32">
+          <Hero 
+            image={heroImage} 
+            title="Recently" 
+            subtitle="Updates & Journal" 
+          />
+        </div>
+      ) : (
+        <header className="mb-24 px-6 md:px-16">
+          <h2 className="text-4xl md:text-6xl font-light mb-4 italic">Recently</h2>
+          <div className="h-px w-24 bg-brand-charcoal opacity-20" />
+        </header>
+      )}
 
-      <div className="space-y-40">
+      <div className="max-w-3xl mx-auto px-6 md:px-0 space-y-40">
         {posts.map((post) => (
           <article key={post._id} className="group relative">
             <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-16">

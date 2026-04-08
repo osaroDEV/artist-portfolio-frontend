@@ -97,6 +97,10 @@ export interface SiteSettings {
   newsletterTitle: string;
   newsletterSubtitle: string;
   newsletterSubmitLabel: string;
+  heroRecently?: SanityImage;
+  heroPaintings?: SanityImage;
+  heroDrawings?: SanityImage;
+  heroPhotography?: SanityImage;
 }
 
 export interface AboutExhibition {

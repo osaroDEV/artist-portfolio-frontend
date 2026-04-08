@@ -10,6 +10,19 @@ function localePortableText(field: string, locale: string) {
   return `"${field}": coalesce(${field}.${locale}, ${field}.en)`
 }
 
+const imageProjection = `
+  asset->{
+    _id,
+    url,
+    metadata {
+      dimensions,
+      lqip
+    }
+  },
+  hotspot,
+  crop
+`
+
 export async function getGalleryItems(
   locale: string,
   category?: string,
@@ -142,7 +155,11 @@ export async function getSiteSettings(locale: string): Promise<SiteSettings | nu
     ${localeString('aboutTitle', locale)},
     ${localeString('newsletterTitle', locale)},
     ${localeString('newsletterSubtitle', locale)},
-    ${localeString('newsletterSubmitLabel', locale)}
+    ${localeString('newsletterSubmitLabel', locale)},
+    heroRecently { ${imageProjection} },
+    heroPaintings { ${imageProjection} },
+    heroDrawings { ${imageProjection} },
+    heroPhotography { ${imageProjection} }
   }`
 
   return client.fetch<SiteSettings>(query)
