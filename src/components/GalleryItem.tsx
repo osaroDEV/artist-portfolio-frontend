@@ -25,7 +25,10 @@ export default function GalleryItem({item, priority = false}: Props) {
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="relative aspect-4/5 overflow-hidden bg-brand-cream/50 shadow-sm">
+      <div 
+        className="relative overflow-hidden bg-brand-cream/50 shadow-sm"
+        style={{ aspectRatio: item.image?.asset?.metadata?.dimensions?.aspectRatio || '4/5' }}
+      >
         <motion.div
           animate={{ 
             scale: isHovered ? 1.08 : 1,
@@ -39,7 +42,7 @@ export default function GalleryItem({item, priority = false}: Props) {
             alt={item.image.alt || item.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover"
+            className="object-contain"
             priority={priority}
             placeholder="blur"
             blurDataURL={item.image.asset?.metadata?.lqip}

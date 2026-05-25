@@ -52,12 +52,15 @@ export default async function RecentlyPage(props: {
               {/* Content */}
               <div className="flex-grow space-y-8">
                 {post.contentType === 'image' && post.image && (
-                  <div className="aspect-[4/5] relative bg-neutral-100 overflow-hidden">
+                  <div 
+                    className="relative bg-neutral-100 overflow-hidden"
+                    style={{ aspectRatio: post.image?.asset?.metadata?.dimensions?.aspectRatio || '4/5' }}
+                  >
                     <Image
                       src={urlFor(post.image).width(1200).url()}
                       alt={post.image.alt || ''}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                       placeholder="blur"
                       blurDataURL={post.image.asset.metadata.lqip}
                     />
@@ -78,12 +81,15 @@ export default async function RecentlyPage(props: {
                 {post.contentType === 'mixed' && (
                   <div className="space-y-8">
                     {post.image && (
-                      <div className="aspect-[4/5] relative bg-neutral-100 overflow-hidden">
+                      <div 
+                        className="relative bg-neutral-100 overflow-hidden"
+                        style={{ aspectRatio: post.image?.asset?.metadata?.dimensions?.aspectRatio || '4/5' }}
+                      >
                         <Image
                           src={urlFor(post.image).width(1200).url()}
                           alt={post.image.alt || ''}
                           fill
-                          className="object-cover"
+                          className="object-contain"
                           placeholder="blur"
                           blurDataURL={post.image.asset.metadata.lqip}
                         />
