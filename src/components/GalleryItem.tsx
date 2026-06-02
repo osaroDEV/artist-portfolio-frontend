@@ -10,9 +10,10 @@ import {PortableText} from '@portabletext/react';
 interface Props {
   item: GalleryItemType;
   priority?: boolean;
+  hideHoverOverlay?: boolean;
 }
 
-export default function GalleryItem({item, priority = false}: Props) {
+export default function GalleryItem({item, priority = false, hideHoverOverlay = false}: Props) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -31,8 +32,8 @@ export default function GalleryItem({item, priority = false}: Props) {
       >
         <motion.div
           animate={{ 
-            scale: isHovered ? 1.08 : 1,
-            filter: isHovered ? 'brightness(0.7)' : 'brightness(1)'
+            scale: !hideHoverOverlay && isHovered ? 1.08 : 1,
+            filter: !hideHoverOverlay && isHovered ? 'brightness(0.7)' : 'brightness(1)'
           }}
           transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
           className="w-full h-full relative"
@@ -49,9 +50,15 @@ export default function GalleryItem({item, priority = false}: Props) {
           />
         </motion.div>
 
+        {item.seriesRef && (
+          <div className="absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-xs px-3 py-1 border border-brand-charcoal/10 shadow-sm text-[9px] uppercase tracking-[0.2em] text-brand-charcoal">
+            Series: {item.seriesRef.title}
+          </div>
+        )}
+
         {/* Premium Hover Overlay */}
         <AnimatePresence>
-          {isHovered && (
+          {!hideHoverOverlay && isHovered && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -129,18 +136,6 @@ export default function GalleryItem({item, priority = false}: Props) {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-
-      {/* Persistent Info (Mobile-friendly / Context) */}
-      <div className="flex flex-col items-center text-center space-y-1 py-1">
-        <h3 className="text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-brand-charcoal transition-all duration-700 group-hover:text-brand-charcoal/30 group-hover:translate-y-1">
-          {item.title}
-        </h3>
-        {item.year && (
-          <span className="text-[9px] uppercase tracking-widest text-brand-charcoal/20 transition-all duration-700 group-hover:opacity-0">
-            {item.year}
-          </span>
-        )}
       </div>
     </motion.div>
   );

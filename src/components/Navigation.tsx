@@ -2,7 +2,7 @@
 
 import { Link, usePathname } from "@/i18n/routing";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Instagram } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -52,9 +52,17 @@ export default function Navigation() {
               {item.label}
             </Link>
           ))}
+          <div className="pt-4">
+            <a
+              href="https://www.instagram.com/ellarbecker/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-charcoal/60 hover:text-brand-pink transition-all hover:translate-x-1 inline-block"
+            >
+              <Instagram size={18} strokeWidth={1.5} />
+            </a>
+          </div>
         </div>
-
-
       </div>
 
       {/* Mobile Header */}
@@ -97,6 +105,16 @@ export default function Navigation() {
                   <div className="h-px w-0 bg-brand-charcoal transition-all duration-500 group-hover:w-full" />
                 </Link>
               ))}
+              <div className="pt-2">
+                <a
+                  href="https://www.instagram.com/ellarbecker/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-charcoal/60 hover:text-brand-pink transition-colors inline-block"
+                >
+                  <Instagram size={28} strokeWidth={1} />
+                </a>
+              </div>
             </div>
 
             <div className="mt-auto pt-12 border-t border-brand-charcoal/10 flex flex-col space-y-8">

@@ -1,4 +1,4 @@
-import {getGalleryItems, getSiteSettings} from '@/lib/queries';
+import {getGalleryItems, getSiteSettings, getSeriesCovers} from '@/lib/queries';
 import GalleryGrid from '@/components/GalleryGrid';
 import Hero from '@/components/Hero';
 import {getTranslations} from 'next-intl/server';
@@ -8,11 +8,30 @@ export default async function CategoryPage(props: {
 }) {
   const {locale, category} = await props.params;
 
-  const [items, settings, t] = await Promise.all([
+  const [rawItems, settings, t] = await Promise.all([
     getGalleryItems(locale, category),
     getSiteSettings(locale),
     getTranslations({locale, namespace: 'Nav'})
   ]);
+
+  let items = rawItems;
+
+  if (category === 'paintings') {
+    const seriesMap = new Set<string>();
+    const processedItems: typeof rawItems = [];
+
+    for (const item of rawItems) {
+      if (item.seriesRef) {
+        if (!seriesMap.has(item.seriesRef._id)) {
+          seriesMap.add(item.seriesRef._id);
+          processedItems.push(item);
+        }
+      } else {
+        processedItems.push(item);
+      }
+    }
+    items = processedItems;
+  }
   
   // Mapping route name to dynamic titles from Sanity with localized fallbacks
   const categoryTitle = {

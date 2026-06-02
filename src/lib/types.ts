@@ -32,6 +32,12 @@ export interface SanityImage {
   caption?: string;
 }
 
+export interface Series {
+  _id: string;
+  title: string;
+  slug: { current: string };
+}
+
 export interface GalleryItem {
   _id: string;
   title: string;
@@ -43,6 +49,7 @@ export interface GalleryItem {
   medium?: string;
   description?: any; // Portable Text
   series?: string;
+  seriesRef?: Series;
   featured?: boolean;
   order?: number;
 }
