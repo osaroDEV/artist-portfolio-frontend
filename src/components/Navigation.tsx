@@ -97,7 +97,7 @@ export default function Navigation() {
                   key={item.href}
                   href={item.href as any}
                   onClick={() => setIsOpen(false)}
-                  className={`text-4xl font-serif font-light transition-colors hover:text-brand-pink ${
+                  className={`text-4xl font-serif font-light uppercase transition-colors hover:text-brand-pink ${
                     isActive(item.href) ? "text-brand-pink italic" : "opacity-70"
                   }`}
                 >

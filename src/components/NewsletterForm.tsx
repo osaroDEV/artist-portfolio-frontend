@@ -37,33 +37,34 @@ export default function NewsletterForm({ title = 'Stay updated', subtitle, submi
   }
 
   return (
-    <div className="space-y-4 max-w-sm">
-      <div className="space-y-1">
+    <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-8 max-w-sm md:max-w-none">
+      <div className="whitespace-nowrap py-2">
         <h3 className="text-xs uppercase tracking-widest font-medium opacity-90">{title}</h3>
         {subtitle && (
           <p className="text-[10px] uppercase tracking-wide opacity-70 italic">{subtitle}</p>
         )}
       </div>
       
-      <form onSubmit={handleSubmit} className="flex group relative overflow-hidden">
-        <input
-          type="email"
-          name="email"
-          placeholder="your email address"
-          required
-          className="bg-transparent border-b border-brand-charcoal/40 py-2 text-[10px] uppercase tracking-widest focus:outline-none focus:border-brand-charcoal transition-all w-full placeholder:opacity-50"
-          disabled={status === 'loading'}
-        />
-        <button
-          type="submit"
-          className="border-b border-brand-charcoal/40 py-2 px-6 text-[10px] uppercase tracking-widest hover:border-brand-charcoal hover:bg-brand-charcoal/5 transition-all disabled:opacity-50 font-medium"
-          disabled={status === 'loading'}
-        >
-          {status === 'loading' ? '...' : submitLabel}
-        </button>
-      </form>
-      
-      <div className="h-4 overflow-hidden">
+      <div className="w-full max-w-md relative">
+        <form onSubmit={handleSubmit} className="flex group overflow-hidden w-full">
+          <input
+            type="email"
+            name="email"
+            placeholder="your email address"
+            required
+            className="bg-transparent border-b border-brand-charcoal/40 py-2 text-[10px] uppercase tracking-widest focus:outline-none focus:border-brand-charcoal transition-all w-full placeholder:opacity-50"
+            disabled={status === 'loading'}
+          />
+          <button
+            type="submit"
+            className="border-b border-brand-charcoal/40 py-2 px-6 text-[10px] uppercase tracking-widest hover:border-brand-charcoal hover:bg-brand-charcoal/5 transition-all disabled:opacity-50 font-medium whitespace-nowrap"
+            disabled={status === 'loading'}
+          >
+            {status === 'loading' ? '...' : submitLabel}
+          </button>
+        </form>
+        
+        <div className="h-4 overflow-hidden absolute left-0 -bottom-5 w-full">
         <AnimatePresence mode="wait">
           {message && (
             <motion.p 
@@ -78,6 +79,7 @@ export default function NewsletterForm({ title = 'Stay updated', subtitle, submi
             </motion.p>
           )}
         </AnimatePresence>
+      </div>
       </div>
     </div>
   );

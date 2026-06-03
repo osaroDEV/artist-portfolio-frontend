@@ -57,6 +57,8 @@ export interface GalleryItem {
 export interface RecentlyPost {
   _id: string;
   title: string;
+  slug: { current: string };
+  excerpt?: string;
   publishedAt: string;
   contentType: 'image' | 'text' | 'exhibition' | 'mixed';
   image?: SanityImage;

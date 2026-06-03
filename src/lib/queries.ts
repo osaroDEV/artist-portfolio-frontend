@@ -96,7 +96,9 @@ export async function getFeaturedGalleryItems(locale: string): Promise<GalleryIt
 export async function getRecentlyFeed(locale: string): Promise<RecentlyPost[]> {
   const query = `*[_type == "recentlyFeed"] | order(publishedAt desc) {
     _id,
-    title,
+    ${localeString('title', locale)},
+    slug,
+    ${localeString('excerpt', locale)},
     publishedAt,
     contentType,
     image {
@@ -132,6 +134,49 @@ export async function getRecentlyFeed(locale: string): Promise<RecentlyPost[]> {
   }`
 
   return client.fetch<RecentlyPost[]>(query)
+}
+
+export async function getRecentlyPost(locale: string, slug: string): Promise<RecentlyPost | null> {
+  const query = `*[_type == "recentlyFeed" && slug.current == $slug][0] {
+    _id,
+    ${localeString('title', locale)},
+    slug,
+    ${localeString('excerpt', locale)},
+    publishedAt,
+    contentType,
+    image {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions,
+          lqip
+        }
+      },
+      hotspot,
+      crop,
+      ${localeString('alt', locale)},
+      ${localeString('caption', locale)}
+    },
+    ${localePortableText('body', locale)},
+    exhibitionDetails {
+      ${localeString('exhibitionTitle', locale)},
+      ${localeString('venue', locale)},
+      location,
+      startDate,
+      endDate,
+      ${localePortableText('description', locale)}
+    },
+    tags,
+    linkedGalleryItems[]->{
+      _id,
+      ${localeString('title', locale)},
+      slug,
+      image { asset->{ url, metadata { lqip } } }
+    }
+  }`
+
+  return client.fetch<RecentlyPost | null>(query, {slug})
 }
 
 export async function getSiteSettings(locale: string): Promise<SiteSettings | null> {
