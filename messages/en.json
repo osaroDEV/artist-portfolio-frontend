@@ -26,11 +26,10 @@
   },
   "about": {
     "statement_label": "Artist Statement",
-    "exhibitions_label": "Exhibitions",
+    "exhibitions_label": "Shows",
     "education_label": "Education",
-    "projects_label": "Projects",
-    "bibliography_label": "Bibliography",
-    "network_label": "Network"
+    "projects_label": "Projects & Scholarships",
+    "collections_label": "Works in Public Collections"
   },
   "meta": {
     "about_title": "About - Ella Becker"

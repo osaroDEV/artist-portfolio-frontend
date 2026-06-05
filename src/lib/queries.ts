@@ -239,11 +239,6 @@ export const ABOUT_QUERY = `*[_type == "aboutPage"][0] {
     "description": coalesce(description.$locale, description.en),
     "role": coalesce(role.$locale, role.en),
     link
-  },
-  networkLinks[] {
-    _key,
-    name,
-    url
   }
 }`
 
@@ -272,11 +267,6 @@ export async function fetchAbout(locale: string): Promise<AboutPageData | null> 
       ${localeString('description', locale)},
       ${localeString('role', locale)},
       link
-    },
-    networkLinks[] {
-      _key,
-      name,
-      url
     }
   }`
   return client.fetch<AboutPageData>(query)

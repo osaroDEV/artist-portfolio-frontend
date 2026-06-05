@@ -114,7 +114,7 @@ export interface SiteSettings {
 
 export interface AboutExhibition {
   _key: string;
-  type: 'education' | 'residency' | 'publication' | 'solo-exhibition' | 'group-exhibition';
+  type: 'education' | 'residency' | 'solo-exhibition' | 'group-exhibition' | 'public-collection';
   year?: string;
   title?: string;
   institution?: string;
@@ -123,16 +123,10 @@ export interface AboutExhibition {
   link?: string;
 }
 
-export interface NetworkLink {
-  _key: string;
-  name: string;
-  url: string;
-}
 
 export interface AboutPageData {
   portraitImage: SanityImage;
   bio: string;
   artistStatement: any;
   exhibitions: AboutExhibition[];
-  networkLinks: NetworkLink[];
 }
