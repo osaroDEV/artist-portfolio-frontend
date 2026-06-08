@@ -142,17 +142,17 @@ export default function AboutPageClient({data, title}: {data: AboutPageData; tit
   const collections = data.exhibitions?.filter((e) => e.type === 'public-collection') || [];
 
   return (
-    <div className="min-h-screen pt-32 pb-32 px-6 md:px-12 lg:px-24">
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
+    <div className="w-full">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
 
         {/* ── Left Column: Portrait ── */}
-        <div className="md:col-span-12 lg:col-span-4 flex flex-col pt-4">
+        <div className="md:col-span-12 lg:col-span-4 flex flex-col">
           {data.portraitImage && (
             <motion.div
               initial={{opacity: 0, scale: 0.97}}
               animate={{opacity: 1, scale: 1}}
               transition={{duration: 0.8, ease: easeSilk}}
-              className="relative w-full aspect-square overflow-hidden"
+              className="relative w-full aspect-[3/4] overflow-hidden"
             >
               <Image
                 src={data.portraitImage.asset.url}
