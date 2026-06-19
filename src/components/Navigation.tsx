@@ -42,13 +42,13 @@ export default function Navigation() {
             <Link
               key={item.href}
               href={item.href as any}
-              className={`text-xs uppercase tracking-[0.2em] transition-all hover:translate-x-1 hover:text-brand-pink ${
+              className={`text-[11px] uppercase tracking-[0.2em] font-light transition-all hover:translate-x-1 hover:text-brand-pink ${
                 isActive(item.href)
-                  ? "text-brand-pink font-medium"
-                  : "text-brand-charcoal/80"
+                  ? "text-brand-pink"
+                  : "text-brand-charcoal/70"
               }`}
             >
-              {isActive(item.href) && <span className="mr-2">—</span>}
+              {isActive(item.href) && <span className="mr-2 opacity-40">—</span>}
               {item.label}
             </Link>
           ))}
@@ -97,12 +97,12 @@ export default function Navigation() {
                   key={item.href}
                   href={item.href as any}
                   onClick={() => setIsOpen(false)}
-                  className={`text-4xl font-serif font-light uppercase transition-colors hover:text-brand-pink ${
-                    isActive(item.href) ? "text-brand-pink italic" : "opacity-70"
+                  className={`text-3xl font-light uppercase tracking-[0.15em] transition-colors hover:text-brand-pink ${
+                    isActive(item.href) ? "text-brand-pink" : "text-brand-charcoal/70"
                   }`}
                 >
+                  {isActive(item.href) && <span className="mr-3 text-xl opacity-40">—</span>}
                   {item.label}
-                  <div className="h-px w-0 bg-brand-charcoal transition-all duration-500 group-hover:w-full" />
                 </Link>
               ))}
               <div className="pt-2">

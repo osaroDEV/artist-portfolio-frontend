@@ -1,12 +1,9 @@
 import {getRecentlyFeed, getSiteSettings} from '@/lib/queries';
 import Image from 'next/image';
 import {urlFor} from '@/lib/sanity';
-import {format} from 'date-fns';
-import {de, enUS, fr} from 'date-fns/locale';
 import Hero from '@/components/Hero';
 import {Link} from '@/i18n/routing';
 
-const dateLocales = {en: enUS, de, fr};
 
 export default async function RecentlyPage(props: {
   params: Promise<{locale: string}>;
@@ -18,7 +15,6 @@ export default async function RecentlyPage(props: {
     getSiteSettings(locale)
   ]);
   
-  const dateLocale = dateLocales[locale as keyof typeof dateLocales] || enUS;
   const heroImage = settings?.heroRecently;
 
   return (
@@ -43,13 +39,6 @@ export default async function RecentlyPage(props: {
           <article key={post._id} className="group relative border-b border-brand-charcoal/5 pb-24 md:pb-32 last:border-0">
             <Link href={`/recently/${post.slug?.current || '#'}`} className="block">
               <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-16">
-                {/* Date/Sidebar */}
-                <div className="md:w-32 flex-shrink-0 pt-2">
-                  <time className="text-[10px] uppercase tracking-widest opacity-40">
-                    {format(new Date(post.publishedAt), 'MMMM yyyy', {locale: dateLocale})}
-                  </time>
-                </div>
-
                 {/* Content Preview */}
                 <div className="flex-grow space-y-6">
                   <h3 className="text-2xl md:text-3xl font-serif font-light group-hover:text-brand-pink transition-colors">

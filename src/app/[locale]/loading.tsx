@@ -4,7 +4,7 @@ import {useLocale} from 'next-intl';
 
 export default function Loading() {
   const locale = useLocale();
-  const loadingText = locale === 'de' ? 'Ein moment, bitte' : 'One moment please';
+  const loadingText = locale === 'de' ? 'Einen moment, bitte' : 'One moment please';
 
   return (
     <div className="fixed inset-0 bg-brand-cream z-100 flex items-center justify-center">
