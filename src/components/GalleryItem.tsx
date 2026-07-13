@@ -50,11 +50,6 @@ export default function GalleryItem({item, priority = false, hideHoverOverlay = 
           />
         </motion.div>
 
-        {item.seriesRef && (
-          <div className="absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-xs px-3 py-1 border border-brand-charcoal/10 shadow-sm text-[9px] uppercase tracking-[0.2em] text-brand-charcoal">
-            Series: {item.seriesRef.title}
-          </div>
-        )}
 
         {/* Premium Hover Overlay */}
         <AnimatePresence>
