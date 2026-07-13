@@ -8,13 +8,23 @@
     "about": "About",
     "contact": "Contact",
     "cv": "CV",
-    "featured_works": "Portfolio & Series"
+    "featured_works": "Portfolio & Series",
+    "portfolio": "Portfolio"
   },
   "Gallery": {
     "dimensions": "Dimensions",
     "medium": "Medium",
     "year": "Year",
     "viewMore": "View More"
+  },
+  "Portfolio": {
+    "all": "All Works",
+    "painting_drawing": "Painting & Drawing",
+    "photography": "Photography",
+    "spatial_performative": "Spatial & Performative",
+    "sort_order": "Curated Order",
+    "sort_newest": "Newest to Oldest",
+    "sort_oldest": "Oldest to Newest"
   },
   "Contact": {
     "title": "Get in Touch",

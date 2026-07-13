@@ -121,17 +121,6 @@ export default function GalleryGrid({ items }: Props) {
     <>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
         {items.map((item, index) => {
-          if (item.seriesRef?.slug?.current) {
-            return (
-              <Link
-                key={item._id}
-                href={`/paintings/series/${item.seriesRef.slug.current}`}
-                className="cursor-pointer group block"
-              >
-                <GalleryItem item={item} priority={index < 4} hideHoverOverlay />
-              </Link>
-            );
-          }
           return (
             <div
               key={item._id}

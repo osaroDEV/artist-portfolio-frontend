@@ -8,13 +8,23 @@
     "about": "Über",
     "contact": "Kontakt",
     "cv": "Lebenslauf",
-    "featured_works": "Portfolio & Serien"
+    "featured_works": "Portfolio & Serien",
+    "portfolio": "Portfolio"
   },
   "Gallery": {
     "dimensions": "Maße",
     "medium": "Medium",
     "year": "Jahr",
     "viewMore": "Mehr sehen"
+  },
+  "Portfolio": {
+    "all": "Alle Arbeiten",
+    "painting_drawing": "Malerei & Grafik",
+    "photography": "Fotografie",
+    "spatial_performative": "Räumlich & performativ",
+    "sort_order": "Kuratierte Reihenfolge",
+    "sort_newest": "Neueste zuerst",
+    "sort_oldest": "Älteste zuerst"
   },
   "Contact": {
     "title": "Kontakt",

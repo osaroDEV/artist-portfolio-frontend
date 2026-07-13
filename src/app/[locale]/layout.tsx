@@ -39,7 +39,10 @@ export default async function LocaleLayout(props: {
   const settings = await getSiteSettings(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning translate="no">
+      <head>
+        <meta name="google" content="notranslate" />
+      </head>
       <body
         className={`${inter.variable} ${crimsonPro.variable} antialiased font-sans`}
       >

@@ -51,12 +51,6 @@ export async function getGalleryItems(
     year,
     ${localeString('medium', locale)},
     ${localePortableText('description', locale)},
-    ${localeString('series', locale)},
-    seriesRef->{
-      _id,
-      slug,
-      ${localeString('title', locale)}
-    },
     featured,
     order
   }`
@@ -86,8 +80,7 @@ export async function getFeaturedGalleryItems(locale: string): Promise<GalleryIt
     dimensions,
     year,
     ${localeString('medium', locale)},
-    ${localePortableText('description', locale)},
-    ${localeString('series', locale)}
+    ${localePortableText('description', locale)}
   }`
 
   return client.fetch<GalleryItem[]>(query)
@@ -124,12 +117,30 @@ export async function getRecentlyFeed(locale: string): Promise<RecentlyPost[]> {
       endDate,
       ${localePortableText('description', locale)}
     },
-    tags,
     linkedGalleryItems[]->{
       _id,
       ${localeString('title', locale)},
       slug,
-      image { asset->{ url, metadata { lqip } } }
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions,
+            lqip
+          }
+        },
+        hotspot,
+        crop,
+        ${localeString('alt', locale)}
+      },
+      category,
+      dimensions,
+      year,
+      ${localeString('medium', locale)},
+      ${localePortableText('description', locale)},
+      featured,
+      order
     }
   }`
 
@@ -167,12 +178,30 @@ export async function getRecentlyPost(locale: string, slug: string): Promise<Rec
       endDate,
       ${localePortableText('description', locale)}
     },
-    tags,
     linkedGalleryItems[]->{
       _id,
       ${localeString('title', locale)},
       slug,
-      image { asset->{ url, metadata { lqip } } }
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions,
+            lqip
+          }
+        },
+        hotspot,
+        crop,
+        ${localeString('alt', locale)}
+      },
+      category,
+      dimensions,
+      year,
+      ${localeString('medium', locale)},
+      ${localePortableText('description', locale)},
+      featured,
+      order
     }
   }`
 
@@ -272,83 +301,3 @@ export async function fetchAbout(locale: string): Promise<AboutPageData | null> 
   return client.fetch<AboutPageData>(query)
 }
 
-export interface SeriesWithItems {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  paintings: GalleryItem[];
-}
-
-export async function getSeriesWithItems(
-  locale: string,
-  slug: string,
-): Promise<SeriesWithItems | null> {
-  const query = `*[_type == "series" && slug.current == $slug][0] {
-    _id,
-    ${localeString('title', locale)},
-    slug,
-    "paintings": *[_type == "galleryItem" && references(^._id)] | order(order asc, year desc) {
-      _id,
-      ${localeString('title', locale)},
-      slug,
-      image {
-        asset->{
-          _id,
-          url,
-          metadata {
-            dimensions,
-            lqip
-          }
-        },
-        hotspot,
-        crop,
-        ${localeString('alt', locale)}
-      },
-      category,
-      dimensions,
-      year,
-      ${localeString('medium', locale)},
-      ${localePortableText('description', locale)}
-    }
-  }`
-  return client.fetch<SeriesWithItems | null>(query, {slug})
-}
-
-export interface SeriesCover {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  coverItem: GalleryItem | null;
-}
-
-export async function getSeriesCovers(locale: string): Promise<SeriesCover[]> {
-  const query = `*[_type == "series"] | order(title asc) {
-    _id,
-    ${localeString('title', locale)},
-    slug,
-    "coverItem": *[_type == "galleryItem" && references(^._id)] | order(order asc, year desc)[0] {
-      _id,
-      ${localeString('title', locale)},
-      slug,
-      image {
-        asset->{
-          _id,
-          url,
-          metadata {
-            dimensions,
-            lqip
-          }
-        },
-        hotspot,
-        crop,
-        ${localeString('alt', locale)}
-      },
-      category,
-      dimensions,
-      year,
-      ${localeString('medium', locale)},
-      ${localePortableText('description', locale)}
-    }
-  }`
-  return client.fetch<SeriesCover[]>(query)
-}

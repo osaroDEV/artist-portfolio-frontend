@@ -14,9 +14,7 @@ export default function Navigation() {
 
   const navItems = [
     { href: "/recently", label: t("recently") },
-    { href: "/paintings", label: t("paintings") },
-    { href: "/drawings", label: t("drawings") },
-    { href: "/photography", label: t("photography") },
+    { href: "/", label: t("portfolio") },
     { href: "/about", label: t("about") },
     { href: "/contact", label: t("contact") },
   ];

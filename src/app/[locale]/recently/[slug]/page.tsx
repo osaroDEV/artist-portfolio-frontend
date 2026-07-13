@@ -6,6 +6,7 @@ import {format} from 'date-fns';
 import {de, enUS, fr} from 'date-fns/locale';
 import {notFound} from 'next/navigation';
 import {Link} from '@/i18n/routing';
+import GalleryGrid from '@/components/GalleryGrid';
 
 const dateLocales = {en: enUS, de, fr};
 
@@ -127,25 +128,7 @@ export default async function RecentlyPostPage(props: {
           {post.linkedGalleryItems && post.linkedGalleryItems.length > 0 && (
             <div className="mt-24 pt-16 border-t border-brand-charcoal/10">
               <h3 className="text-[10px] uppercase tracking-widest opacity-40 mb-8">Related Works</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-                {post.linkedGalleryItems.map((item) => (
-                  <Link key={item._id} href={`/gallery/${item.slug.current}`} className="group block space-y-4">
-                    <div className="relative aspect-square bg-neutral-100 overflow-hidden">
-                      <Image
-                        src={item.image.asset.url}
-                        alt={item.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        placeholder="blur"
-                        blurDataURL={item.image.asset.metadata.lqip}
-                      />
-                    </div>
-                    <div className="text-xs tracking-wider opacity-60 group-hover:opacity-100 transition-opacity">
-                      {item.title}
-                    </div>
-                  </Link>
-                ))}
-              </div>
+              <GalleryGrid items={post.linkedGalleryItems} />
             </div>
           )}
         </div>

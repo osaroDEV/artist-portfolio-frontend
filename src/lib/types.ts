@@ -32,12 +32,6 @@ export interface SanityImage {
   caption?: string;
 }
 
-export interface Series {
-  _id: string;
-  title: string;
-  slug: { current: string };
-}
-
 export interface GalleryItem {
   _id: string;
   title: string;
@@ -48,8 +42,6 @@ export interface GalleryItem {
   year?: number;
   medium?: string;
   description?: any; // Portable Text
-  series?: string;
-  seriesRef?: Series;
   featured?: boolean;
   order?: number;
 }
@@ -72,12 +64,7 @@ export interface RecentlyPost {
     description?: any;
   };
   tags?: string[];
-  linkedGalleryItems?: Array<{
-    _id: string;
-    title: string;
-    slug: { current: string };
-    image: { asset: { url: string; metadata: { lqip: string } } };
-  }>;
+  linkedGalleryItems?: GalleryItem[];
 }
 
 export interface SiteSettings {
