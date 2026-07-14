@@ -40,7 +40,7 @@ export default async function RecentlyPage(props: {
             <Link href={`/recently/${post.slug?.current || '#'}`} className="block">
               <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8">
                 {/* Content Preview */}
-                <div className="flex-grow space-y-3 md:space-y-4">
+                <div className="grow space-y-3 md:space-y-4">
                   <h3 className="text-2xl md:text-3xl font-serif font-light group-hover:text-brand-pink transition-colors leading-tight">
                     {post.title}
                   </h3>
